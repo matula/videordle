@@ -1,0 +1,16 @@
+youtube-dl "https://www.youtube.com/watch?v=djV11Xbc914" -o tom.mp4
+
+ffmpeg -i al.mkv -ss '15' -t '30' al.gif
+
+
+ffmpeg -i aha-takeonme.mov -vf "fps=10,scale=480:-1:flags=lanczos,split[s0][s1];[s0]palettegen[p];[s1][p]paletteuse" -loop 0 aha-takeonme.gif
+
+ffmpeg -i output.gif -vf fps=5,scale=480:-1,smartblur=ls=-0.5,crop=iw:ih-2:0:0 result.gif
+
+gifsicle -O3 result.gif -o result_optimized.gif
+
+youtube-dl -o "%(id)s.%(ext)s" "https://www.youtube.com/watch?v=sP1_rT0wyQo"
+
+x - youtube-dl -o input.mkv https://www.youtube.com/watch?v=AzjS8k5TEsY
+  
+ffmpeg -i input.mkv -ss 76 -t 4 output.mp4

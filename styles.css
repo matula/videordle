@@ -1,0 +1,56 @@
+html {
+    height: 115%
+}
+
+#content {
+    width: 800px;
+    margin: 0 auto;
+}
+
+#main_image {
+    /* background-image: url('CdqoNKCCt7A.gif'); */
+    width: 640px;
+    height: 480px;
+    margin-bottom: 10px;
+}
+
+.bg1 {
+    background-size: 10000px 5250px;
+    background-position: 30% top;
+
+}
+
+.bg2 {
+    background-size: 6400px 3200px;
+    background-position: 60% 60%;
+}
+
+.bg3 {
+    background-size: 3200px 2400px;
+    background-position: 60% 80%;
+}
+
+.bg4 {
+    background-size: 2000px 1500px;
+    background-position: 30% bottom;
+}
+
+.bg5 {
+    background-size: 1280px 960px;
+    background-position: 60% top;
+}
+
+.bg6 {
+    background-size: 1000px 750px;
+    background-position: 30% top;
+}
+
+.bgfinal {
+    background-size: 640px 480px;
+}
+
+.videoList {
+    text-decoration: underline;
+    cursor: pointer;
+    color: #069;
+}

@@ -1,17 +1,8 @@
-html {
-    height: 115%
-}
-
-#content {
-    width: 800px;
-    margin: 0 auto;
-}
-
 #main_image {
-    /* background-image: url('CdqoNKCCt7A.gif'); */
     width: 640px;
     height: 480px;
-    margin-bottom: 10px;
+    background-clip: border-box;
+    margin: 0 auto;
 }
 
 .bg1 {

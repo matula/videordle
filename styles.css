@@ -3,37 +3,38 @@
     height: 480px;
     background-clip: border-box;
     margin: 0 auto;
+    background-position: 50% 50%;
 }
 
 .bg1 {
     background-size: 10000px 5250px;
-    background-position: 30% top;
+    /* background-position: 50% 50%; */
 
 }
 
 .bg2 {
     background-size: 6400px 3200px;
-    background-position: 60% 60%;
+    /* background-position: 60% 60%; */
 }
 
 .bg3 {
     background-size: 3200px 2400px;
-    background-position: 60% 80%;
+    /* background-position: 60% 80%;*/
 }
 
 .bg4 {
     background-size: 2000px 1500px;
-    background-position: 30% bottom;
+    /* background-position: 30% bottom;*/
 }
 
 .bg5 {
     background-size: 1280px 960px;
-    background-position: 60% top;
+    /* background-position: 60% top;*/
 }
 
 .bg6 {
     background-size: 1000px 750px;
-    background-position: 30% top;
+    /* background-position: 30% top;*/
 }
 
 .bgfinal {

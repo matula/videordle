@@ -31,7 +31,9 @@ var playlist = {
     "SXJSLXZxdnhPbms=": "Julian Lennon - Valotte",
     "UEdOaVhHWDJuTFU=": "Dead Or Alive - You Spin Me Round (Like a Record)",
     "dFUySHliREdKSFE=": "The Outfield - Say It Isn't So",
-    "MElIbENteW1RM00=": "Nik Kershaw - Wouldn't It Be Good"
+    "MElIbENteW1RM00=": "Nik Kershaw - Wouldn't It Be Good",
+    "aFRXS2Jmb2lrZWc=": "Nirvana - Smells Like Teen Spirit",
+    "ZFF3NHc5V2dYY1E=": "Rick Astley - Never Gonna Give You Up"
 }
 
 export { playlist };

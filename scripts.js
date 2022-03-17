@@ -9,7 +9,9 @@ const availableVideos = [
     'J9gKyRmic20',
     'djV11Xbc914',
     'CdqoNKCCt7A',
-    'aENX1Sf3fgQ'
+    'aENX1Sf3fgQ',
+    'dQw4w9WgXcQ',
+    'hTWKbfoikeg'
 ];
 
 // The selected video to show
@@ -55,7 +57,39 @@ function checkAnswer(videoAnswer) {
         const videoTitle = document.createElement('h1');
         videoTitle.innerHTML = '<a href="https://www.youtube.com/watch?v=' + theVideo + '" target="_blank">' + videos[videoAnswer] + '</a>';
         results.appendChild(videoTitle);
-        
+
+        const d = new Date();
+        let text = d.toLocaleDateString();
+        let copyResults = 'Videordle (' + text + '):';
+        if (!isCorrect) {
+            copyResults += ' ⬛ ⬛ ⬛ ⬛ ⬛ ⬛'
+        } else {
+            for (let i = 0; i < 6; i++) {
+                if (i == imageIndex) {
+                    copyResults += ' 🟩';
+                    break;
+                } else {
+                    copyResults += ' ⬛';
+                }
+            }
+        }
+        const resultsCopyText = document.createElement('div');
+        resultsCopyText.id = 'resultsCopy';
+        resultsCopyText.innerHTML = copyResults;
+        results.appendChild(resultsCopyText);
+
+        const shareButton = document.createElement('button');
+        shareButton.id = 'shareButton';
+        shareButton.classList.add('btn', 'btn-primary', 'btn-sm');
+        shareButton.innerHTML = 'Copy results for sharing';
+        results.appendChild(shareButton);
+
+        shareButton.addEventListener('click', e => {
+            navigator.clipboard.writeText(copyResults).then(() => {
+                alert("Copied to clipboard");
+            });
+        });
+
         // Add the video title to the last element in the guess list
         let guessList = document.getElementById(guessId);
         let videoName = videos[videoAnswer];
@@ -74,12 +108,12 @@ function checkAnswer(videoAnswer) {
     mainImage.classList.add(imageClasses[imageIndex + 1]);
     imageIndex++;
     let guessList = document.getElementById(guessId);
-    let videoName = (videoAnswer == undefined) ? ' -- ' : videos[videoAnswer];
+    let videoName = (videoAnswer == undefined) ? '' : videos[videoAnswer];
     guessList.classList.add('bg-danger', 'bg-gradient', 'bg-opacity-25');
     guessList.innerHTML = '❌ ' + videoName;
 }
 
-const showVideos = async () => {
+const searchVideos = async () => {
     // remove previous search responses
     results.innerHTML = '';
 
@@ -116,7 +150,11 @@ const showVideos = async () => {
 // Find as you type
 chooser.addEventListener('input', e => {
     chooser_term = e.target.value;
-    showVideos();
+    if (chooser_term.length > 1) {
+        searchVideos();
+    } else {
+        results.innerHTML = '';
+    }
 });
 
 // This is the "skip" button

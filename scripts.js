@@ -11,26 +11,62 @@ const availableVideos = [
     'CdqoNKCCt7A',
     'aENX1Sf3fgQ',
     'dQw4w9WgXcQ',
-    'hTWKbfoikeg'
+    'hTWKbfoikeg',
+    '3qVPNONdF58',
+    'rog8ou-ZepE',
+    'eBShN8qT4lk',
+    'dTAAsCNK7RA',
+    'XfR9iY5y94s',
+    'LKYPYj2XX80',
+    'K1b8AhIsSYQ',
+    'E1fzJ_AYajA',
+    '5IsSpAOD6K8'
 ];
 
+// Set localstorage info
+let myStorage = window.localStorage;
+
+const startDate = new Date("16 Mar 2022");
+const todayDate = new Date();
+const todayDateString = todayDate.toDateString();
+
+const getTheWordIndexForToday = () => {
+    // return Math.floor(Math.random() * availableVideos.length); // random ID
+    // get index based on offset of startDate
+    const timeDiff = todayDate.getTime() - startDate.getTime();
+    return Math.floor(Math.abs(timeDiff / (1000 * 3600 * 24))) % availableVideos.length;
+}
+
+
+
 // The selected video to show
-const theVideo = availableVideos[Math.floor(Math.random() * availableVideos.length)];
+const theVideo = availableVideos[getTheWordIndexForToday()];
 // Text input for search
 const chooser = document.getElementById('chooser');
+
+// minutes until next day
+const nextVideo = document.getElementById('nextVideo');
+nextVideo.innerHTML = Math.round((86400 - Math.floor(new Date() / 1000) % 86400) / 60);
 
 let imageClasses = ['bg1', 'bg2', 'bg3', 'bg4', 'bg5', 'bg6'];
 let imageIndex = 0;
 
 // The main image
 const mainImage = document.getElementById('main_image');
-mainImage.style.backgroundImage = "url('" + theVideo + ".gif')";
+mainImage.style.backgroundImage = "url('gifs/" + theVideo + ".gif')";
 
 // The results from searching
 const results = document.getElementById('results');
 
 // the entered search input
 let chooser_term = '';
+
+// Check if today was already complete
+if (myStorage.getItem(todayDateString) != undefined) {
+    let storedResults = JSON.parse(myStorage.getItem(todayDateString));
+    imageIndex = storedResults.index;
+    checkAnswer(storedResults.answer);
+}
 
 function checkAnswer(videoAnswer) {
     // remove the previous image class
@@ -48,6 +84,10 @@ function checkAnswer(videoAnswer) {
             videoAnswer = btoa(theVideo);
         }
 
+        // Store the results
+        let storeData = { 'index': imageIndex, 'answer': videoAnswer };
+        myStorage.setItem(todayDateString, JSON.stringify(storeData));
+
         // Show the fully zoomed out
         mainImage.classList.add('bgfinal');
         // Remove all the search components
@@ -58,8 +98,7 @@ function checkAnswer(videoAnswer) {
         videoTitle.innerHTML = '<a href="https://www.youtube.com/watch?v=' + theVideo + '" target="_blank">' + videos[videoAnswer] + '</a>';
         results.appendChild(videoTitle);
 
-        const d = new Date();
-        let text = d.toLocaleDateString();
+        let text = todayDate.toLocaleDateString();
         let copyResults = 'Videordle (' + text + '):';
         if (!isCorrect) {
             copyResults += ' ⬛ ⬛ ⬛ ⬛ ⬛ ⬛'
@@ -159,8 +198,10 @@ chooser.addEventListener('input', e => {
 
 // This is the "skip" button
 const submitAnswer = document.getElementById('submitAnswer');
-submitAnswer.addEventListener('click', e => {
-    chooser.value = '';
-    checkAnswer();
-});
+if (submitAnswer) {
+    submitAnswer.addEventListener('click', e => {
+        chooser.value = '';
+        checkAnswer();
+    });
+}
 

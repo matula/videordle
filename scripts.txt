@@ -2,15 +2,20 @@ youtube-dl "https://www.youtube.com/watch?v=djV11Xbc914" -o tom.mp4
 
 ffmpeg -i al.mkv -ss '15' -t '30' al.gif
 
+hl-dywm.mkv
 
-ffmpeg -i aha-takeonme.mov -vf "fps=10,scale=480:-1:flags=lanczos,split[s0][s1];[s0]palettegen[p];[s1][p]paletteuse" -loop 0 aha-takeonme.gif
+ffmpeg -i dyfam.gif -ss '15' -t '30' -vf "fps=10,scale=240:-1:flags=lanczos,split[s0][s1];[s0]palettegen[p];[s1][p]paletteuse" -loop 0 dyfam.gif
+
+ffmpeg -i dQw4w9WgXcQ-nggyu.mov -vf "fps=10,scale=240:-1:flags=lanczos,split[s0][s1];[s0]palettegen[p];[s1][p]paletteuse" -loop 0 dQw4w9WgXcQ-nggyu.gif
 
 ffmpeg -i output.gif -vf fps=5,scale=480:-1,smartblur=ls=-0.5,crop=iw:ih-2:0:0 result.gif
 
-gifsicle -O3 result.gif -o result_optimized.gif
+gifsicle -O3 dQw4w9WgXcQ-nggyu.gif -o dQw4w9WgXcQ.gif && gifsicle -O3 hTWKbfoikeg-slts.gif -o hTWKbfoikeg.gif
 
 youtube-dl -o "%(id)s.%(ext)s" "https://www.youtube.com/watch?v=sP1_rT0wyQo"
 
 x - youtube-dl -o input.mkv https://www.youtube.com/watch?v=AzjS8k5TEsY
   
 ffmpeg -i input.mkv -ss 76 -t 4 output.mp4
+
+ffmpeg -i dQw4w9WgXcQ-nggyu.mov -vf "fps=10,scale=240:-1:flags=lanczos,split[s0][s1];[s0]palettegen[p];[s1][p]paletteuse" -loop 0 dQw4w9WgXcQ-nggyu.gif

@@ -4,7 +4,20 @@ import { playlist as videos } from './playlist.js';
 const videosArray = Object.entries(videos);
 
 // video IDs to choose from
-const availableVideos = ['FTQbiNvZqaY','J9gKyRmic20','djV11Xbc914','CdqoNKCCt7A','aENX1Sf3fgQ','dQw4w9WgXcQ','hTWKbfoikeg','3qVPNONdF58','rog8ou-ZepE','eBShN8qT4lk','dTAAsCNK7RA','XfR9iY5y94s','LKYPYj2XX80','K1b8AhIsSYQ','E1fzJ_AYajA','5IsSpAOD6K8','4JkIs37a2JE','AjPau5QYtYs','JmcA9LIIXWw','Jne9t8sHpUc','L_jWHffIx5E','LuN6gs0AJls','PIb6AZdTr-A','PWgvGjAhvIw','hIs5StN8J-0','l7vRSu_wsNc','oIb9QUGjdIc','r3kQlzOi27M','uPudE8nDog0','uejh-bHa4To','GHhD4PD75zY','JkRKT6T0QLg','LatorN4P9aA','QqqBs6kkzHE','SwrYMWoqg5w','Yf_Lwe6p-Cg','ejorQVy3m8E','ijAYN9zVnwg','m3-hY-hlhBg','rkpG4XApJ28','uq-gYOrU8bA','z5rRZdiu1UE'];
+const availableVideos = [
+    'FTQbiNvZqaY', 'J9gKyRmic20',
+    'djV11Xbc914', 'CdqoNKCCt7A', 'aENX1Sf3fgQ', 'dQw4w9WgXcQ', 
+    'hTWKbfoikeg', '3qVPNONdF58', 'rog8ou-ZepE', 
+    'eBShN8qT4lk', 'dTAAsCNK7RA', 'XfR9iY5y94s', 'LKYPYj2XX80', 
+    'K1b8AhIsSYQ', 'E1fzJ_AYajA', '5IsSpAOD6K8', '4JkIs37a2JE', 
+    'AjPau5QYtYs', 'JmcA9LIIXWw', 'Jne9t8sHpUc', 'L_jWHffIx5E', 
+    'LuN6gs0AJls', 'PIb6AZdTr-A', 'PWgvGjAhvIw', 'hIs5StN8J-0', 
+    'l7vRSu_wsNc', 'oIb9QUGjdIc', 'r3kQlzOi27M', 'uPudE8nDog0', 
+    'uejh-bHa4To', 'GHhD4PD75zY', 'JkRKT6T0QLg', 'LatorN4P9aA', 
+    'QqqBs6kkzHE', 'SwrYMWoqg5w', 'Yf_Lwe6p-Cg',
+    'ejorQVy3m8E', 'ijAYN9zVnwg',
+    'm3-hY-hlhBg', 'rkpG4XApJ28', 'uq-gYOrU8bA', 'z5rRZdiu1UE'
+];
 
 // Set localstorage info
 let myStorage = window.localStorage;
@@ -80,7 +93,7 @@ function checkAnswer(videoAnswer) {
         results.appendChild(videoTitle);
 
         let text = todayDate.toLocaleDateString();
-        let copyResults = 'Videordle (' + text + '):';
+        let copyResults = 'Videordle.com (' + text + '):';
         if (!isCorrect) {
             copyResults += ' ⬛ ⬛ ⬛ ⬛ ⬛ ⬛'
         } else {
@@ -93,11 +106,13 @@ function checkAnswer(videoAnswer) {
                 }
             }
         }
+
         const resultsCopyText = document.createElement('div');
         resultsCopyText.id = 'resultsCopy';
         resultsCopyText.innerHTML = copyResults;
         results.appendChild(resultsCopyText);
 
+        results.appendChild(document.createElement('br'));
         const shareButton = document.createElement('button');
         shareButton.id = 'shareButton';
         shareButton.classList.add('btn', 'btn-primary', 'btn-sm');

@@ -5,47 +5,47 @@ const videosArray = Object.entries(videos);
 
 // video IDs to choose from
 const availableVideos = [
-    'FTQbiNvZqaY', 
+    'FTQbiNvZqaY',
     'J9gKyRmic20',
-    'djV11Xbc914', 
-    'CdqoNKCCt7A', 
-    'aENX1Sf3fgQ', 
+    'djV11Xbc914',
+    'CdqoNKCCt7A',
+    'aENX1Sf3fgQ',
     'dQw4w9WgXcQ',
-    'hTWKbfoikeg', 
-    '3qVPNONdF58', 
+    'hTWKbfoikeg',
+    '3qVPNONdF58',
     'rog8ou-ZepE',
-    'eBShN8qT4lk', 
-    'dTAAsCNK7RA', 
-    'XfR9iY5y94s', 
+    'eBShN8qT4lk',
+    'dTAAsCNK7RA',
+    'XfR9iY5y94s',
     'LKYPYj2XX80',
-    'K1b8AhIsSYQ', 
-    'E1fzJ_AYajA', 
-    '5IsSpAOD6K8', 
+    'K1b8AhIsSYQ',
+    'E1fzJ_AYajA',
+    '5IsSpAOD6K8',
     '4JkIs37a2JE',
-    'AjPau5QYtYs', 
-    'JmcA9LIIXWw', 
-    'Jne9t8sHpUc', 
+    'AjPau5QYtYs',
+    'JmcA9LIIXWw',
+    'Jne9t8sHpUc',
     'L_jWHffIx5E',
-    'LuN6gs0AJls', 
-    'PIb6AZdTr-A', 
-    'PWgvGjAhvIw', 
+    'LuN6gs0AJls',
+    'PIb6AZdTr-A',
+    'PWgvGjAhvIw',
     'hIs5StN8J-0',
-    'l7vRSu_wsNc', 
-    'oIb9QUGjdIc', 
-    'r3kQlzOi27M', 
+    'l7vRSu_wsNc',
+    'oIb9QUGjdIc',
+    'r3kQlzOi27M',
     'uPudE8nDog0',
-    'uejh-bHa4To', 
-    'GHhD4PD75zY', 
-    'JkRKT6T0QLg', 
+    'uejh-bHa4To',
+    'GHhD4PD75zY',
+    'JkRKT6T0QLg',
     'LatorN4P9aA',
-    'QqqBs6kkzHE', 
-    'SwrYMWoqg5w', 
+    'QqqBs6kkzHE',
+    'SwrYMWoqg5w',
     'Yf_Lwe6p-Cg',
-    'ejorQVy3m8E', 
+    'ejorQVy3m8E',
     'ijAYN9zVnwg',
-    'm3-hY-hlhBg', 
-    'rkpG4XApJ28', 
-    'uq-gYOrU8bA', 
+    'm3-hY-hlhBg',
+    'rkpG4XApJ28',
+    'uq-gYOrU8bA',
     'z5rRZdiu1UE'
 ];
 
@@ -82,8 +82,17 @@ const theVideo = availableVideos[getTheWordIndexForToday()];
 const chooser = document.getElementById('chooser');
 
 // minutes until next day
+function getMinutesToTomorrow() {
+    // tomorrow date
+    let tomorrow = new Date(todayDate);
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    tomorrow.setHours(0, 0, 0, 0);
+
+    return (Math.round((tomorrow - todayDate) / 1000 / 60)); // convert to minutes
+}
+
 const nextVideo = document.getElementById('nextVideo');
-nextVideo.innerHTML = Math.round((86400 - Math.floor(new Date() / 1000) % 86400) / 60);
+nextVideo.innerHTML = getMinutesToTomorrow();
 
 let imageClasses = ['bg1', 'bg2', 'bg3', 'bg4', 'bg5', 'bg6'];
 let imageIndex = 0;

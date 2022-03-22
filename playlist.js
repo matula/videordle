@@ -10,6 +10,7 @@ var playlist = {
     "THVONmdzMEFKbHM=": "Modern English - I Melt With You",
     "NUhJX3hGUVdpWVU=": "When In Rome - The Promise",
     "dWVqaC1iSGE0VG8=": "'Til Tuesday - Voices Carry",
+    "aFRXS2Jmb2lrZWc=": "Nirvana - Smells Like Teen Spirit",
     "U3dyWU1Xb3FnNXc=": "T'Pau - Heart And Soul",
     "b0liOVFVR2pkSWM=": "Berlin - No More Words",
     "aElzNVN0TjhKLTA=": "Animotion - Obsession",

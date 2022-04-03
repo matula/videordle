@@ -253,3 +253,59 @@ if (submitAnswer) {
     });
 }
 
+const infoModalButton = document.getElementById('modal-info-button');
+const infoModal = document.getElementById('modal-info');
+const infoModalClose = document.getElementById('modal-info-close');
+
+const qModalButton = document.getElementById('modal-q-button');
+const qModal = document.getElementById('modal-q');
+const qModalClose = document.getElementById('modal-q-close');
+
+const graphModalButton = document.getElementById('modal-graph-button');
+const graphModal = document.getElementById('modal-graph');
+const graphModalClose = document.getElementById('modal-graph-close');
+
+const modalDarken = document.getElementById('modal-darken');
+
+function closeModal(modal) {
+    modal.classList.remove('show')
+    modalDarken.classList.remove('darken')
+}
+
+infoModalButton.addEventListener('click', (e) => {
+    e.preventDefault();
+    infoModal.classList.add('show')
+    modalDarken.classList.add('darken')
+    infoModalClose.addEventListener('click', () => {
+        closeModal(infoModal);
+    })
+    modalDarken.addEventListener('click', () => {
+        closeModal(infoModal);
+    })
+})
+
+qModalButton.addEventListener('click', (e) => {
+    e.preventDefault();
+    qModal.classList.add('show')
+    modalDarken.classList.add('darken')
+    qModalClose.addEventListener('click', () => {
+        closeModal(qModal);
+    })
+    modalDarken.addEventListener('click', () => {
+        closeModal(qModal);
+    })
+})
+
+graphModalButton.addEventListener('click', (e) => {
+    e.preventDefault();
+    graphModal.classList.add('show')
+    modalDarken.classList.add('darken')
+    graphModalClose.addEventListener('click', () => {
+        closeModal(graphModal);
+    })
+    modalDarken.addEventListener('click', () => {
+        closeModal(graphModal);
+    })
+})
+
+

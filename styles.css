@@ -1,44 +1,40 @@
+
 #main_image {
-    width: 640px;
-    height: 480px;
     background-clip: border-box;
     margin: 0 auto;
     background-position: 50% 50%;
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 0;
+    padding-top: 75%;
 }
 
 .bg1 {
-    background-size: 10000px 5250px;
-    /* background-position: 50% 50%; */
-
+    background-size: 1562%;
 }
 
 .bg2 {
-    background-size: 6400px 3200px;
-    /* background-position: 60% 60%; */
+    background-size: 1200%;
 }
 
 .bg3 {
-    background-size: 3200px 2400px;
-    /* background-position: 60% 80%;*/
+    background-size: 800%;
 }
 
 .bg4 {
-    background-size: 2000px 1500px;
-    /* background-position: 30% bottom;*/
+    background-size: 500%;
 }
 
 .bg5 {
-    background-size: 1280px 960px;
-    /* background-position: 60% top;*/
+    background-size: 300%;
 }
 
 .bg6 {
-    background-size: 1000px 750px;
-    /* background-position: 30% top;*/
+    background-size: 200%;
 }
 
 .bgfinal {
-    background-size: 640px 480px;
+    background-size: contain;
 }
 
 .videoList {
@@ -51,4 +47,96 @@
     font-style: italic;
     margin: 2px;
     padding: 0;
+}
+
+#modal-darken {
+    position: absolute;
+    z-index: 1010;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, .65);
+    display: none;
+}
+
+#modal-darken.darken {
+    display: block;
+}
+
+.modals {
+    width: 75%;
+    background-color: #222;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    padding: 45px;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 300ms ease-in-out;
+    z-index: 1011;
+}
+
+.modals.show {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.modal-close {
+    position: absolute;
+    font-size: 1.2rem;
+    right: 0px;
+    top: 0px;
+    cursor: pointer;
+}
+
+/* Custom default button */
+.btn-secondary,
+.btn-secondary:hover,
+.btn-secondary:focus {
+    color: #333;
+    text-shadow: none;
+    /* Prevent inheritance from `body` */
+}
+
+
+/*
+ * Base structure
+ */
+
+body {
+    text-shadow: 0 .05rem .1rem rgba(0, 0, 0, .5);
+    box-shadow: inset 0 0 5rem rgba(0, 0, 0, .5);
+}
+
+.cover-container {
+    max-width: 42em;
+}
+
+
+/*
+ * Header
+ */
+
+.nav-masthead .nav-link {
+    padding: .25rem 0;
+    font-weight: 700;
+    color: #fff;
+    background-color: transparent;
+    border-bottom: .25rem solid transparent;
+}
+
+.nav-masthead .nav-link:hover,
+.nav-masthead .nav-link:focus {
+    border-bottom-color: rgba(255, 255, 255, .25);
+}
+
+.nav-masthead .nav-link+.nav-link {
+    margin-left: 1rem;
+}
+
+.nav-masthead .active {
+    color: #fff;
+    border-bottom-color: #fff;
 }

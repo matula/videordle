@@ -46,7 +46,24 @@ const availableVideos = [
     'm3-hY-hlhBg',
     'rkpG4XApJ28',
     'uq-gYOrU8bA',
-    'z5rRZdiu1UE'
+    'z5rRZdiu1UE',
+    'cOeKidp-iWo',
+    '5-WpsdC2-Cc',
+    'PGNiXGX2nLU',
+    '79fzeNUqQbQ',
+    'nTizYn3-QN0',
+    'xwtdhWltSIg',
+    '0-EF60neguk',
+    'cjIvu7e6Wq8',
+    'wTP2RUD_cL0',
+    'HasaQvHCv4w',
+    'eBG7P-K-r1Y',
+    '4xmckWVPRaI',
+    'W8r-tXRLazs',
+    'kemivUKb4f4',
+    '9SOryJvTAGs',
+    'RRKJiM9Njr8',
+    'etviGf1uWlg'
 ];
 
 // Set localstorage info
@@ -59,12 +76,14 @@ const queryString = new Proxy(new URLSearchParams(window.location.search), {
 let overrideDate = queryString.dateoverride;
 
 const startDate = new Date("16 Mar 2022");
+let currentDate = new Date();
 let todayDate = new Date();
 
 // If overriding, change "todays" date
 if (overrideDate) {
-    console.log('override');
     todayDate = new Date(overrideDate);
+    // keep the current time so "minutes to tomorrow" is still correct
+    todayDate.setHours(currentDate.getHours(), currentDate.getMinutes(), currentDate.getSeconds());
 }
 
 const todayDateString = todayDate.toDateString();
@@ -140,7 +159,7 @@ function checkAnswer(videoAnswer) {
         document.getElementById('search-label').remove();
         document.getElementById('search-input').remove();
         // Create a link to the video
-        const videoTitle = document.createElement('h1');
+        const videoTitle = document.createElement('h2');
         videoTitle.innerHTML = '<a href="https://www.youtube.com/watch?v=' + theVideo + '" target="_blank">' + videos[videoAnswer] + '</a>';
         results.appendChild(videoTitle);
 
@@ -253,6 +272,8 @@ if (submitAnswer) {
     });
 }
 
+// Modals
+
 const infoModalButton = document.getElementById('modal-info-button');
 const infoModal = document.getElementById('modal-info');
 const infoModalClose = document.getElementById('modal-info-close');
@@ -266,6 +287,7 @@ const graphModal = document.getElementById('modal-graph');
 const graphModalClose = document.getElementById('modal-graph-close');
 
 const modalDarken = document.getElementById('modal-darken');
+
 
 function closeModal(modal) {
     modal.classList.remove('show')
@@ -298,6 +320,15 @@ qModalButton.addEventListener('click', (e) => {
 
 graphModalButton.addEventListener('click', (e) => {
     e.preventDefault();
+    var date = new Date();
+    month = date.getMonth();
+    year = date.getFullYear();
+    document.getElementById("curMonth").innerHTML = months[month];
+    document.getElementById("curYear").innerHTML = year;
+    loadCalendarMonths();
+    loadCalendarYears();
+    loadCalendarDays();
+
     graphModal.classList.add('show')
     modalDarken.classList.add('darken')
     graphModalClose.addEventListener('click', () => {
@@ -306,6 +337,151 @@ graphModalButton.addEventListener('click', (e) => {
     modalDarken.addEventListener('click', () => {
         closeModal(graphModal);
     })
-})
+});
 
+// Calendar stuff
 
+var months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+var startYear = 2022;
+var endYear = 2022;
+var month = 0;
+var year = 0;
+let monthToggle = 'hide';
+let yearToggle = 'hide';
+
+function loadCalendarMonths() {
+    // Create a dropdown of months and add hidden to dom
+    for (var i = 0; i < months.length; i++) {
+        var doc = document.createElement("div");
+        doc.innerHTML = months[i];
+        doc.classList.add("dropdown-item");
+
+        doc.onclick = (function () {
+            var selectedMonth = i;
+            return function () {
+                month = selectedMonth;
+                document.getElementById("curMonth").innerHTML = months[month];
+                loadCalendarDays();
+                document.getElementById('months').style.display = 'none';
+                monthToggle = 'hide';
+                return month;
+            }
+        })();
+
+        document.getElementById("months").appendChild(doc);
+    }
+}
+
+function loadCalendarYears() {
+    document.getElementById("years").innerHTML = "";
+
+    for (var i = startYear; i <= endYear; i++) {
+        var doc = document.createElement("div");
+        doc.innerHTML = i;
+        doc.classList.add("dropdown-item");
+
+        doc.onclick = (function () {
+            var selectedYear = i;
+            return function () {
+                year = selectedYear;
+                document.getElementById("curYear").innerHTML = year;
+                loadCalendarDays();
+                return year;
+            }
+        })();
+
+        document.getElementById("years").appendChild(doc);
+    }
+}
+
+function loadCalendarDays() {
+    document.getElementById("calendarDays").innerHTML = "";
+
+    var tmpDate = new Date(year, month, 0);
+    var num = daysInMonth(month, year);
+    var dayofweek = tmpDate.getDay(); 
+    let nowDate = new Date();
+    nowDate.setHours(0, 0, 0, 0);
+
+    for (var i = 0; i <= dayofweek; i++) {
+        var d = document.createElement("div");
+        d.classList.add("day");
+        d.classList.add("blank");
+        document.getElementById("calendarDays").appendChild(d);
+    }
+
+    for (var i = 0; i < num; i++) {
+        var tmp = i + 1;
+        var d = document.createElement("div");
+        d.id = "calendarday_" + i;
+        d.classList.add('day');
+
+        var dateString = tmp.toString().padStart(2, "0") + ' ' + months[month] + ' ' + year;
+
+        let thisDate = new Date(dateString);
+
+        // highlight today's date
+        if(thisDate.getTime() == nowDate.getTime()) {
+            d.classList.add('todayDay');
+        }
+
+        // highlight the current overridden date if different from today
+        if(thisDate.getTime() == todayDate.getTime()) {
+            if(todayDate.getTime() != nowDate.getTime()) {
+                d.classList.add('selectedDay');
+            }
+        }
+
+        d.innerHTML = tmp;
+        d.dataset.day = tmp;
+
+        // Only underline and make clickable old dates
+        if(thisDate.getTime() <= nowDate.getTime()) {
+            d.classList.add('dayUnderline');
+            d.addEventListener('click', (e) => {
+                let dateQuery = e.currentTarget.dataset.day.padStart(2, "0") + ' ' + months[month] + ' ' + year;
+                window.location.href = window.location.protocol + "//" + window.location.host + window.location.pathname + '?dateoverride=' + dateQuery;
+            });
+            
+        } else {
+
+        }
+
+        document.getElementById("calendarDays").appendChild(d);
+    }
+
+    var clear = document.createElement("div");
+    clear.className = "clear";
+    document.getElementById("calendarDays").appendChild(clear);
+}
+
+function daysInMonth(month, year) {
+    var d = new Date(year, month + 1, 0);
+    return d.getDate();
+}
+
+let curMonthClick = document.getElementById('curMonth');
+
+// show/hide the month dropdown
+curMonthClick.addEventListener('click', (e) => {
+    if (monthToggle == 'show') {
+        monthToggle = 'hide';
+        document.getElementById('months').style.display = 'none';
+    } else {
+        monthToggle = 'show';
+        document.getElementById('months').style.display = 'block';
+    }
+});
+
+let curYearClick = document.getElementById('curYear');
+
+// show/hide the year dropdown, eventually
+curYearClick.addEventListener('click', (e) => {
+    // if(yearToggle == 'show') {
+    //     yearToggle = 'hide';
+    //     document.getElementById('years').style.display = 'none';
+    // } else {
+    //     yearToggle = 'show';
+    //     document.getElementById('years').style.display = 'block';
+    // }
+});

@@ -399,9 +399,12 @@ function loadCalendarDays() {
 
     var tmpDate = new Date(year, month, 0);
     var num = daysInMonth(month, year);
-    var dayofweek = tmpDate.getDay(); 
+    var dayofweek = tmpDate.getDay();
     let nowDate = new Date();
     nowDate.setHours(0, 0, 0, 0);
+    // overwrite todayDate time to be 0 for better comparrison
+    let selectedTodayDate = todayDate;
+    selectedTodayDate.setHours(0, 0, 0, 0);
 
     for (var i = 0; i <= dayofweek; i++) {
         var d = document.createElement("div");
@@ -421,13 +424,13 @@ function loadCalendarDays() {
         let thisDate = new Date(dateString);
 
         // highlight today's date
-        if(thisDate.getTime() == nowDate.getTime()) {
+        if (thisDate.getTime() == nowDate.getTime()) {
             d.classList.add('todayDay');
         }
 
         // highlight the current overridden date if different from today
-        if(thisDate.getTime() == todayDate.getTime()) {
-            if(todayDate.getTime() != nowDate.getTime()) {
+        if (thisDate.getTime() == selectedTodayDate.getTime()) {
+            if (selectedTodayDate.getTime() != nowDate.getTime()) {
                 d.classList.add('selectedDay');
             }
         }
@@ -436,14 +439,12 @@ function loadCalendarDays() {
         d.dataset.day = tmp;
 
         // Only underline and make clickable old dates
-        if(thisDate.getTime() <= nowDate.getTime()) {
+        if (thisDate.getTime() <= nowDate.getTime()) {
             d.classList.add('dayUnderline');
             d.addEventListener('click', (e) => {
                 let dateQuery = e.currentTarget.dataset.day.padStart(2, "0") + ' ' + months[month] + ' ' + year;
                 window.location.href = window.location.protocol + "//" + window.location.host + window.location.pathname + '?dateoverride=' + dateQuery;
             });
-            
-        } else {
 
         }
 

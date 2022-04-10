@@ -4,4 +4,6 @@ After 6 guesses, the fully zoomed out gif is shown.
 
 Very simple, native/vanilla javascript project.
 
-https://matula.github.io/videordle/
+https://videordle.com
+
+

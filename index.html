@@ -1,6 +1,5 @@
 <!doctype html>
 <html lang="en">
-
 <head>
     <title>Videordle - Guess The Music Video!</title>
     <meta charset="utf-8">
@@ -63,7 +62,18 @@
         </header>
         <main class="container">
             <div class="text-center">
-                <p class='nextVideoP'>Next video in <span id='nextVideo'></span> minutes</p>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <span id="videoDate"></span>
+                        </div>
+                        <div class="col-sm-4">
+                        </div>
+                        <div class="col-sm-5">
+                            <span class='nextVideoP'>Next video in <span id='nextVideo'></span> minutes</span>
+                        </div>
+                    </div>
+                </div>
                 <div class="container">
                     <div class="row">
                         <div class="col-sm-12">
@@ -130,7 +140,8 @@
         <i class="fas fa-2x fa-times text-white bg-dark p-3 modal-close" id="modal-q-close">x</i>
         <h4 class="lead">How to Play</h4>
         <p>Try to guess the music video from this clip. After each guess, the video will zoom out a little.<br>
-            <small>Note: Currently heavily focused on 80s and 90s music videos.</small>
+            Click the calendar icon to view past videos and your results.<br>
+            <small>Note: Currently heavily focused on 80s and 90s music videos, with a few from the 2000s.</small>
         </p>
     </div>
     <div id="modal-graph" class="modals  text-left">

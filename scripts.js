@@ -5,35 +5,10 @@ const videosArray = Object.entries(videos);
 
 // video IDs to choose from
 const availableVideos = [
-    'FTQbiNvZqaY',
-    'J9gKyRmic20',
-    'djV11Xbc914',
-    'CdqoNKCCt7A',
-    'aENX1Sf3fgQ',
-    'dQw4w9WgXcQ',
-    'hTWKbfoikeg',
-    '3qVPNONdF58',
-    'rog8ou-ZepE',
-    'eBShN8qT4lk',
-    'dTAAsCNK7RA',
-    'XfR9iY5y94s',
-    'LKYPYj2XX80',
-    'K1b8AhIsSYQ',
-    'E1fzJ_AYajA',
-    '5IsSpAOD6K8',
-    '4JkIs37a2JE',
-    'AjPau5QYtYs',
-    'JmcA9LIIXWw',
-    'Jne9t8sHpUc',
-    'L_jWHffIx5E',
-    'LuN6gs0AJls',
-    'PIb6AZdTr-A',
-    'PWgvGjAhvIw',
-    'hIs5StN8J-0',
     'l7vRSu_wsNc',
+    'uPudE8nDog0',
     'oIb9QUGjdIc',
     'r3kQlzOi27M',
-    'uPudE8nDog0',
     'uejh-bHa4To',
     'GHhD4PD75zY',
     'JkRKT6T0QLg',
@@ -63,7 +38,32 @@ const availableVideos = [
     'kemivUKb4f4',
     '9SOryJvTAGs',
     'RRKJiM9Njr8',
-    'etviGf1uWlg'
+    'etviGf1uWlg',
+    'FTQbiNvZqaY',
+    'L_jWHffIx5E',
+    'LuN6gs0AJls',
+    'PIb6AZdTr-A',
+    'PWgvGjAhvIw',
+    'hIs5StN8J-0',
+    'J9gKyRmic20',
+    'djV11Xbc914',
+    'E1fzJ_AYajA',
+    '5IsSpAOD6K8',
+    '4JkIs37a2JE',
+    'CdqoNKCCt7A',
+    'aENX1Sf3fgQ',
+    'eBShN8qT4lk',
+    'dTAAsCNK7RA',
+    'XfR9iY5y94s',
+    'LKYPYj2XX80',
+    'K1b8AhIsSYQ',
+    'AjPau5QYtYs',
+    'JmcA9LIIXWw',
+    'Jne9t8sHpUc',
+    'dQw4w9WgXcQ',
+    'hTWKbfoikeg',
+    '3qVPNONdF58',
+    'rog8ou-ZepE'
 ];
 
 // Set localstorage info
@@ -73,20 +73,27 @@ let myStorage = window.localStorage;
 const queryString = new Proxy(new URLSearchParams(window.location.search), {
     get: (searchParams, prop) => searchParams.get(prop),
 });
-let overrideDate = queryString.dateoverride;
+let overrideDate = queryString.day;
 
-const startDate = new Date("16 Mar 2022");
+const startDate = new Date("09 Apr 2022");
 let currentDate = new Date();
 let todayDate = new Date();
 
 // If overriding, change "todays" date
 if (overrideDate) {
     todayDate = new Date(overrideDate);
-    // keep the current time so "minutes to tomorrow" is still correct
-    todayDate.setHours(currentDate.getHours(), currentDate.getMinutes(), currentDate.getSeconds());
+    // make sure the override is between start date and today's date
+    if (todayDate.getTime() < startDate.getTime() || todayDate.getTime() > currentDate.getTime()) {
+        todayDate = currentDate;
+    } else {
+        // keep the current time so "minutes to tomorrow" is still correct
+        todayDate.setHours(currentDate.getHours(), currentDate.getMinutes(), currentDate.getSeconds());
+    }
+
 }
 
 const todayDateString = todayDate.toDateString();
+document.getElementById('videoDate').innerHTML = todayDateString;
 
 const getTheWordIndexForToday = () => {
     // return Math.floor(Math.random() * availableVideos.length); // random ID
@@ -159,8 +166,8 @@ function checkAnswer(videoAnswer) {
         document.getElementById('search-label').remove();
         document.getElementById('search-input').remove();
         // Create a link to the video
-        const videoTitle = document.createElement('h2');
-        videoTitle.innerHTML = '<a href="https://www.youtube.com/watch?v=' + theVideo + '" target="_blank">' + videos[videoAnswer] + '</a>';
+        const videoTitle = document.createElement('h3');
+        videoTitle.innerHTML = '<a href="https://www.youtube.com/watch?v=' + theVideo + '" target="_blank" class="videoSuccess">' + videos[videoAnswer] + '</a>';
         results.appendChild(videoTitle);
 
         let text = todayDate.toLocaleDateString();
@@ -439,13 +446,12 @@ function loadCalendarDays() {
         d.dataset.day = tmp;
 
         // Only underline and make clickable old dates
-        if (thisDate.getTime() <= nowDate.getTime()) {
+        if (thisDate.getTime() <= nowDate.getTime() && thisDate.getTime() >= startDate.getTime()) {
             d.classList.add('dayUnderline');
             d.addEventListener('click', (e) => {
                 let dateQuery = e.currentTarget.dataset.day.padStart(2, "0") + ' ' + months[month] + ' ' + year;
-                window.location.href = window.location.protocol + "//" + window.location.host + window.location.pathname + '?dateoverride=' + dateQuery;
+                window.location.href = window.location.protocol + "//" + window.location.host + window.location.pathname + '?day=' + dateQuery;
             });
-
         }
 
         document.getElementById("calendarDays").appendChild(d);

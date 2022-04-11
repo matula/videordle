@@ -63,7 +63,18 @@ const availableVideos = [
     'dQw4w9WgXcQ',
     'hTWKbfoikeg',
     '3qVPNONdF58',
-    'rog8ou-ZepE'
+    'rog8ou-ZepE',
+    '0aqLwHP4y6Q',
+    '3dOx510kyOs',
+    '4B_UYYPb-Gk',
+    '6VCdJyOAQYM',
+    'UtvmTu4zAMg',
+    'WM8bTdBs-cw',
+    'YgSPaXgAdzE',
+    'd4-1ASpdT1Y',
+    'fC_q9KPczAg',
+    'o1tj2zJ2Wvg',
+    'tDl3bdE3YQA'
 ];
 
 // Set localstorage info
